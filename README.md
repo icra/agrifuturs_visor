@@ -1,0 +1,1 @@
+Aquest repositori conté mapes generats pel projectes Agrifuturs. La seva finalitat és validar les dades, per tant, les dades mostrades són resultats provisionals que no s'han de donar per vàlids en cap cas.
