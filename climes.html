@@ -1,0 +1,79 @@
+<!doctype html><html><head>
+    <meta charset=utf8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visor de mapes de classificacions climàtiques</title>
+
+    <!--libs
+    -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--MULTISELECT-->
+    <script src="https://unpkg.com/vue-multiselect"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect/dist/vue-multiselect.min.css">
+
+
+
+    <!--css general-->
+    <style>
+    </style>
+</head>
+<body>
+
+<!--vue template-->
+<div id=app class="container-fluid">
+    <h1 class="text-center m-4">Visor de mapes de classificacions climàtiques</h1>
+    <div class="row m-4">
+        <div class="col-4">
+            <label for="selectCultiu">Cultiu:</label>
+            <select class="form-select" id="selectCultiu" v-model="selectedMap">
+                <option v-for="map in maps" :value="map">{{map}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="row" v-if="selectedMap">
+        <div class="col-4">
+            <img :src="createMapFile('2020')" class="img-fluid">
+        </div>
+        <div class="col-4">
+            <img :src="createMapFile('RCP45')" class="img-fluid">
+        </div>
+        <div class="col-4">
+            <img :src="createMapFile('RCP85')" class="img-fluid">
+        </div>
+    </div>
+    <div class="alert alert-primary text-center m-4">
+        Els mapes d'aquesta pàgina son resultats provisionals, no es poden donar per vàlids en cap cas.
+    </div>
+</div>
+
+<!--vue instance-->
+<script>
+    let app=Vue.createApp({
+        data(){return {
+            maps: [],
+            selectedMap: null,
+        }},
+
+        methods:{
+            createMapFile(scenari){
+                return `assets/climate_classifications/AGRICULTURA_${this.selectedMap}_${scenari}.png`
+            }
+        },
+
+        computed:{
+
+        },
+    }).mount("#app");
+
+    app.maps = JSON.parse('["AGRICULTURA_REG_HUM_2020.png","AGRICULTURA_REG_HUM_RCP45.png","AGRICULTURA_REG_HUM_RCP85.png","AGRICULTURA_TIPUS_ESTIU_2020.png","AGRICULTURA_TIPUS_ESTIU_RCP45.png","AGRICULTURA_TIPUS_ESTIU_RCP85.png","AGRICULTURA_TIPUS_HIVER_2020.png","AGRICULTURA_TIPUS_HIVER_RCP45.png","AGRICULTURA_TIPUS_HIVER_RCP85.png"]')
+    app.maps = app.maps.map(e => e.replace('AGRICULTURA_', '')
+            .replace(/_([A-Z]|\d)+\.png$/, ''))
+    // get unique
+    app.maps = [...new Set(app.maps)];
+    app.maps.sort((a,b)=>{
+      return a<b?-1:1;
+    });
+</script>
