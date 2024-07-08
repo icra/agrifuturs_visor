@@ -26,7 +26,7 @@
     <h1 class="text-center m-4">Visor de mapes de classificacions climàtiques</h1>
     <div class="row m-4">
         <div class="col-4">
-            <label for="selectCultiu">Cultiu:</label>
+            <label for="selectCultiu">Classificació:</label>
             <select class="form-select" id="selectCultiu" v-model="selectedMap">
                 <option v-for="map in maps" :value="map">{{map}}</option>
             </select>
@@ -68,7 +68,7 @@
         },
     }).mount("#app");
 
-    app.maps = JSON.parse('["AGRICULTURA_REG_HUM_2020.png","AGRICULTURA_REG_HUM_RCP45.png","AGRICULTURA_REG_HUM_RCP85.png","AGRICULTURA_TIPUS_ESTIU_2020.png","AGRICULTURA_TIPUS_ESTIU_RCP45.png","AGRICULTURA_TIPUS_ESTIU_RCP85.png","AGRICULTURA_TIPUS_HIVER_2020.png","AGRICULTURA_TIPUS_HIVER_RCP45.png","AGRICULTURA_TIPUS_HIVER_RCP85.png"]')
+    app.maps = JSON.parse('["AGRICULTURA_LLIUR_GEL_PRESENT.png","AGRICULTURA_LLIUR_GEL_RCP45.png","AGRICULTURA_LLIUR_GEL_RCP85.png","AGRICULTURA_PRESCOTT_PRESENT.png","AGRICULTURA_PRESCOTT_RCP45.png","AGRICULTURA_PRESCOTT_RCP85.png","AGRICULTURA_REG_HUM_2020.png","AGRICULTURA_REG_HUM_RCP45.png","AGRICULTURA_REG_HUM_RCP85.png","AGRICULTURA_TIPUS_ESTIU_2020.png","AGRICULTURA_TIPUS_ESTIU_RCP45.png","AGRICULTURA_TIPUS_ESTIU_RCP85.png","AGRICULTURA_TIPUS_HIVER_2020.png","AGRICULTURA_TIPUS_HIVER_RCP45.png","AGRICULTURA_TIPUS_HIVER_RCP85.png","AGRICULTURA_WINKLER_PRESENT.png","AGRICULTURA_WINKLER_RCP45.png","AGRICULTURA_WINKLER_RCP85.png"]')
     app.maps = app.maps.map(e => e.replace('AGRICULTURA_', '')
             .replace(/_([A-Z]|\d)+\.png$/, ''))
     // get unique
