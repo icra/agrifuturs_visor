@@ -1,0 +1,18 @@
+---
+title: "Idoneïtat dels cultius segons dotacions de regadiu"
+format: pdf
+execute:
+  echo: false
+  warning: false
+---
+
+```{r}
+#| output: asis
+
+library(purrr)
+folder <- "assets/suitability_irrig/"
+list.files(folder) |> 
+  walk(\(f) cat(glue::glue("![]({folder}{f})"), "<br>"))
+
+```
+

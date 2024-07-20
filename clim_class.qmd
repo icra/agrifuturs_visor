@@ -1,0 +1,18 @@
+---
+title: "Classificacions climàtiques"
+format: pdf
+execute:
+  echo: false
+  warning: false
+---
+
+```{r}
+#| output: asis
+
+library(purrr)
+folder <- "assets/climate_classifications/"
+list.files(folder) |> 
+  walk(\(f) cat(glue::glue("![]({folder}/{f})"), "<br>"))
+
+```
+
