@@ -1,5 +1,6 @@
 library(tidyverse)
 library(xml2)
+library(magick)
 
 files <- c(
   file.path("..", "assets", "climate_classifications", list.files("assets/climate_classifications/")),
@@ -8,13 +9,14 @@ files <- c(
   file.path("..", "assets", "nbr", list.files("assets/nbr/"))
 )
 
-size <- 200
-width <- size * 3
-height <- size * length(files)/3 
+size <- 350
+ncol <- 9
+width <- size * ncol
+height <- size * length(files)/ncol
 
 coords <- tibble(
-  x = rep(seq(0, width - size, size), length(files)/3),
-  y = rep(seq(0, height - size, size), each = 3),
+  x = rep(seq(0, width - size, size), length(files)/ncol),
+  y = rep(seq(0, height - size, size), each = ncol),
   file = files
 )
 
